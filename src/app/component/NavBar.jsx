@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Link, Button, Spinner } from "@heroui/react";
 import { signOut, useSession } from "@/lib/auth-client";
