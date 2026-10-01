@@ -17,7 +17,8 @@ const SingUpPage = () => {
         const { data: resData, error } = await signUp.email({
             name: data.name,
             email: data.email,
-            password: data.password
+            password: data.password,
+           
         })
         console.log(resData,error);
         
