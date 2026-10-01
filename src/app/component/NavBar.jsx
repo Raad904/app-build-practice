@@ -1,15 +1,19 @@
 "use client";
 import { useState } from "react";
-import { Link, Button } from "@heroui/react";
-import { useSession } from "@/lib/auth-client";
+import { Link, Button, Spinner } from "@heroui/react";
+import { signOut, useSession } from "@/lib/auth-client";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  
-const { data: session } =useSession();
-console.log('user session in navber',session);
 
+  const { data: session, isPending } = useSession();
+  console.log('user session in navber', session);
+  if (isPending) {
+    return <div className="flex items-center gap-4">
+      <Spinner />
+    </div>
+  }
 
   const NavLinks = <>
     <li>
@@ -28,15 +32,15 @@ console.log('user session in navber',session);
 
 
   const ButtonLinks = <>
-   {
-    session?.user ? <>
-    <span>Welcome {session.user?.name}</span>
-    <Button>Sign out</Button>
-    </> : <>
-     <Link href="#">Login</Link>
-    <Button>Sign Up</Button>
-    </>
-   }
+    {
+      session?.user ? <>
+        <span>Welcome {session.user?.name}</span>
+        <Button onClick={() => signOut()}>Sign out</Button>
+      </> : <>
+        <Link href="/sing-in">Sign In</Link>
+        <Link href="/sing-up"> <Button>Sign Up</Button></Link>
+      </>
+    }
 
   </>
 
