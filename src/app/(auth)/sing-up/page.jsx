@@ -30,9 +30,13 @@ const SingUpPage = () => {
         const resData = await signIn.social({
             provider:"google",
         })
-
-              console.log('after google signIn',resData);
+          
     }
+     const handleGithubSignIn = async()=>{
+    const resData = await signIn.social({
+        provider:"github",
+    })
+}
   
     
 
@@ -108,7 +112,10 @@ const SingUpPage = () => {
             </Form>
 
             <h3>Or</h3>
-            <Button onClick={handleGooleSignIn}>Sign In With Google</Button>
+            <div className="flax justify-between gap-7">
+            <Button onClick={handleGooleSignIn}>Sign In With Google</Button> 
+            <Button onClick={handleGithubSignIn}>Sign In With Github</Button>
+            </div>
         </div>
     );
 };
